@@ -55,12 +55,12 @@ test('传入 null 行不抛错', () => {
 });
 
 test.describe('defaults', () => {
-  test('年份默认是今年减二', () => {
-    assert.strictEqual(defaults().minYear, new Date().getFullYear() - 2);
+  test('年份默认是今年减五', () => {
+    assert.strictEqual(defaults().minYear, new Date().getFullYear() - 5);
   });
-  test('分数默认都是 8', () => {
-    assert.strictEqual(defaults().minImdb, 8);
-    assert.strictEqual(defaults().minDouban, 8);
+  test('分数默认都是 7', () => {
+    assert.strictEqual(defaults().minImdb, 7);
+    assert.strictEqual(defaults().minDouban, 7);
   });
 });
 
@@ -70,8 +70,8 @@ test.describe('normalize', () => {
     assert.deepStrictEqual(normalize({}), defaults());
   });
   test('非法分数回落，不写入 NaN', () => {
-    assert.strictEqual(normalize({ minImdb: '' }).minImdb, 8);
-    assert.strictEqual(normalize({ minDouban: 'abc' }).minDouban, 8);
+    assert.strictEqual(normalize({ minImdb: '' }).minImdb, 7);
+    assert.strictEqual(normalize({ minDouban: 'abc' }).minDouban, 7);
   });
   test('越界分数被夹到 0..10', () => {
     assert.strictEqual(normalize({ minImdb: 99 }).minImdb, 10);

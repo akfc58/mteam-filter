@@ -2,13 +2,13 @@
 (function (root) {
   'use strict';
 
-  /** 默认：IMDb 8 分、豆瓣 8 分、近两年（今年 - 2，含当年） */
+  /** 默认：IMDb 7 分、豆瓣 7 分、近五年（今年 - 5，含当年） */
   function defaults() {
     return {
       enabled: true,
-      minImdb: 8,
-      minDouban: 8,
-      minYear: new Date().getFullYear() - 2
+      minImdb: 7,
+      minDouban: 7,
+      minYear: new Date().getFullYear() - 5
     };
   }
 
