@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "M-Team 评分筛选高亮",
+  "version": "1.0.0",
+  "description": "在 M-Team 种子列表页按 IMDb / 豆瓣评分和影片年份高亮达标条目。",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://kp.m-team.cc/*"],
+      "js": ["src/parser.js", "src/filter.js", "src/panel.js", "src/content.js"],
+      "css": ["src/panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
