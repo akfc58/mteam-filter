@@ -1,0 +1,12 @@
+{
+  "name": "mteam-filter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "M-Team 种子列表按 IMDb / 豆瓣评分和年份高亮的 Chrome 扩展",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

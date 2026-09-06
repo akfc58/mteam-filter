@@ -1,0 +1,134 @@
+/* 蓝紫色是站点配色里空缺的色相：橙黄=置顶行与主题色，绿=豆瓣角标，黄=IMDb 角标，红=分类标签 */
+:root {
+  --mtf-accent: #5b5bd6;
+  --mtf-tint: rgba(91, 91, 214, 0.09);
+  --mtf-panel-bg: rgba(91, 91, 214, 0.05);
+  --mtf-panel-border: rgba(91, 91, 214, 0.22);
+  --mtf-field-bg: rgba(255, 255, 255, 0.75);
+  --mtf-muted: rgba(0, 0, 0, 0.55);
+}
+
+html[data-theme='dark'] {
+  --mtf-accent: #8b8bf0;
+  --mtf-tint: rgba(139, 139, 240, 0.15);
+  --mtf-panel-bg: rgba(139, 139, 240, 0.09);
+  --mtf-panel-border: rgba(139, 139, 240, 0.3);
+  --mtf-field-bg: rgba(255, 255, 255, 0.07);
+  --mtf-muted: rgba(255, 255, 255, 0.6);
+}
+
+/* 命中行。用 tbody 前缀把特异性抬到 (0,1,2)，压过站点的 .bg-sticky_* 单类选择器 */
+tbody tr.mtf-hit {
+  background-color: var(--mtf-tint);
+}
+
+/* 左侧色条必须用绝对定位的伪元素叠在上层：
+   海报图紧贴 td 左边缘，inset box-shadow 画在内容下层会被海报整条盖住 */
+tbody tr.mtf-hit > td:first-child {
+  position: relative;
+}
+
+tbody tr.mtf-hit > td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  z-index: 2;
+  background: var(--mtf-accent);
+  pointer-events: none;
+}
+
+/* 未命中的行压暗，让命中项在满屏 100 条里直接跳出来 */
+tbody tr.mtf-miss {
+  opacity: 0.45;
+}
+
+/* ---- 筛选面板 ---- */
+.mtf-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border: 1px solid var(--mtf-panel-border);
+  border-radius: 8px;
+  background: var(--mtf-panel-bg);
+  font-size: 13px;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.mtf-panel label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mtf-panel .mtf-toggle {
+  font-weight: 600;
+  color: var(--mtf-accent);
+}
+
+.mtf-panel .mtf-toggle input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--mtf-accent);
+  cursor: pointer;
+}
+
+.mtf-fields {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.mtf-panel input[type='number'] {
+  width: 58px;
+  padding: 2px 6px;
+  border: 1px solid var(--mtf-panel-border);
+  border-radius: 4px;
+  background: var(--mtf-field-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mtf-panel input[type='number']:focus {
+  outline: none;
+  border-color: var(--mtf-accent);
+}
+
+/* 关掉总开关时把三个阈值淡化，但仍可编辑 */
+.mtf-panel.mtf-off .mtf-fields {
+  opacity: 0.45;
+}
+
+.mtf-count {
+  margin-left: auto;
+  color: var(--mtf-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.mtf-count b {
+  color: var(--mtf-accent);
+  font-weight: 600;
+}
+
+.mtf-warn {
+  flex-basis: 100%;
+  color: #c2410c;
+  font-size: 12px;
+}
+
+html[data-theme='dark'] .mtf-warn {
+  color: #fb923c;
+}
